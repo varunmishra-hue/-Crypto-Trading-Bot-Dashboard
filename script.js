@@ -6,18 +6,17 @@ function login() {
   alert("Welcome " + user + "! You are now logged in.");
 }
 
-// Fetch market data with timeframe
+// Fetch market data with timeframe and dark chart styling
 async function fetchData() {
   let symbol = document.getElementById("symbol").value;
   let timeframe = document.getElementById("timeframe").value;
 
-  // Map timeframe to Binance intervals
   let intervalMap = {
     "1h": "1h",
     "1d": "1d",
     "1w": "1w",
     "1M": "1M",
-    "1y": "1w" // simulate 1 year with 52 weeks
+    "1y": "1w"
   };
   let interval = intervalMap[timeframe];
   let limit = timeframe === "1y" ? 52 : 100;
@@ -38,10 +37,32 @@ async function fetchData() {
       datasets: [{
         label: `${symbol} Close Price (${timeframe})`,
         data: prices,
-        borderColor: 'gold',
+        borderColor: '#FFD700',
         backgroundColor: 'rgba(255,215,0,0.2)',
         fill: true
       }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          labels: { color: '#FFFFFF' }
+        },
+        tooltip: {
+          backgroundColor: '#333333',
+          titleColor: '#FFD700',
+          bodyColor: '#00FFCC'
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#FFFFFF' },
+          grid: { color: '#444444' }
+        },
+        y: {
+          ticks: { color: '#FFFFFF' },
+          grid: { color: '#444444' }
+        }
+      }
     }
   });
 }
@@ -86,7 +107,4 @@ async function placeOrder() {
 }
 
 function updateTradeTable() {
-  let table = document.getElementById("tradeTable");
-  table.innerHTML = "<tr><th>Symbol</th><th>Side</th><th>Amount</th><th>Price</th><th>Status</th></tr>";
-  trades.forEach(t => {
-    table.innerHTML += `<tr><td>${t.symbol}</td><td>${t.side}</td><td>${t.amount}</td><td>${t.price}</td><td>${t.status}</td></tr>`;
+  let table = document.getElementBy
