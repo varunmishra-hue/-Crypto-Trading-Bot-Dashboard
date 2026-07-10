@@ -2,22 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Crypto Bot Dashboard</title>
+  <title>Crypto Trading Bot Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h1>🤖 Crypto Trading Bot Dashboard</h1>
-
-  <div id="auth">
+  <div class="sidebar">
     <h2>🔐 User Authentication</h2>
+    <select id="menu">
+      <option>Login</option>
+      <option>Register</option>
+    </select>
     <input type="text" id="username" placeholder="Username">
     <input type="password" id="password" placeholder="Password">
     <button onclick="login()">Login</button>
-    <button onclick="register()">Register</button>
   </div>
 
-  <div id="dashboard" style="display:none;">
+  <div class="main">
+    <h1>🤖 Crypto Trading Bot Dashboard</h1>
+
     <h2>📈 Market Data</h2>
     <select id="symbol" onchange="fetchData()">
       <option value="BTCUSDT">BTC/USDT</option>
@@ -34,13 +37,33 @@
     <button onclick="calcPortfolio()">Calculate Value</button>
     <p id="portfolio">Total Value: -- USDT</p>
 
+    <h2>💳 Deposit INR</h2>
+    <input type="number" id="deposit" placeholder="Enter deposit amount (INR)">
+    <select id="payment">
+      <option>PhonePe (UPI)</option>
+      <option>Net Banking</option>
+      <option>Debit/Credit Card</option>
+    </select>
+    <button onclick="depositINR()">Pay Now</button>
+    <p id="depositResult"></p>
+
+    <h2>⚠️ Price Alerts</h2>
+    <input type="number" id="alertPrice" placeholder="Set alert price">
+    <button onclick="setAlert()">Set Alert</button>
+    <p id="alertResult"></p>
+
     <h2>💵 Real Trading (Simulation)</h2>
     <select id="tradeAction">
-      <option value="BUY">Buy</option>
-      <option value="SELL">Sell</option>
+      <option value="None">None</option>
+      <option value="BUY">Buy Portfolio</option>
+      <option value="SELL">Sell Portfolio</option>
     </select>
     <button onclick="placeOrder()">Execute Trade</button>
-    <p id="tradeResult">No trades yet.</p>
+
+    <h2>📊 Transaction History</h2>
+    <table border="1" id="tradeTable">
+      <tr><th>Symbol</th><th>Side</th><th>Amount</th><th>Price</th><th>Status</th></tr>
+    </table>
   </div>
 
   <script src="script.js"></script>
